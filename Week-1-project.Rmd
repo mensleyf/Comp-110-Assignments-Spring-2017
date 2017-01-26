@@ -1,6 +1,6 @@
-# Week 1 Project  
+# Week 1 Project  (level 1 heading)
 
-## Your name should appear here!
+## Mira Ensley-Field (level 2 heading)
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,10 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+A group of people walked over the Bering Land Bridge to North America
+
+* [WORD] (https://en.wikipedia.org/wiki/Beringia)
+- ![Beringia] (https://en.wikipedia.org/wiki/Beringia#/media/File:BeringiaMap-NPSgov.jpg)
+- It happened a really long time ago (~10000 years?)
+* Some archeologists call them the Clovis People
+- this is a dash
