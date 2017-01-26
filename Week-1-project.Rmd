@@ -1,6 +1,6 @@
-# Week 1 Project  (level 1 heading)
+# Week 1 Project
 
-## Mira Ensley-Field (level 2 heading)
+## Mira Ensley-Field
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -12,8 +12,7 @@ library(DataComputing)
 
 A group of people walked over the Bering Land Bridge to North America
 
-* [WORD] (https://en.wikipedia.org/wiki/Beringia)
-- ![Beringia] (https://en.wikipedia.org/wiki/Beringia#/media/File:BeringiaMap-NPSgov.jpg)
+* [Beringia](https://en.wikipedia.org/wiki/Beringia) is another name for the Bering Land Bridge
+- ![Beringia](http://www.athropolis.com/arctic-facts/maps/land-bridge.gif)
 - It happened a really long time ago (~10000 years?)
-* Some archeologists call them the Clovis People
-- this is a dash
+* Some archeologists call them the [Clovis People](https://en.wikipedia.org/wiki/Clovis_culture)
