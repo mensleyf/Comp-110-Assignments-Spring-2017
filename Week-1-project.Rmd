@@ -10,9 +10,24 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-A group of people walked over the Bering Land Bridge to North America
+A group of people walked over the Bering Land Bridge to North America from Eastern Siberia. It is possible that earlier human migration to North America occurred before that via some form of ship, but there is no scientific consensus.
 
 * [Beringia](https://en.wikipedia.org/wiki/Beringia) is another name for the Bering Land Bridge
 - ![Beringia](http://www.athropolis.com/arctic-facts/maps/land-bridge.gif)
-- It happened a really long time ago (~10000 years?)
-* Some archeologists call them the [Clovis People](https://en.wikipedia.org/wiki/Clovis_culture)
+- This event is believed to have happened approximately 13000 years ago
+* Scientists have found that only 70 people from that event passed on their genetic lineage
+
+1. A small group of individuals moving to and forming what eventually becomes a larger population is known in biology as the [Founders Effect](https://en.wikipedia.org/wiki/Founder_effect)
+2. Scientists also believe that all Native Americans descended from that initial population due to similarities between certain genetic markers
+
+```{r}
+my_number<-sin(sqrt(pi))
+print(my_number)
+```
+
+```{r}
+my_number<-sin(sqrt(pi))
+my_other_number<-(asin(my_number))^2
+print(my_other_number)
+```
+
