@@ -1,0 +1,69 @@
+# Week 2 Project
+
+## Mira Ensley-Field
+
+<!-- leave this material as is -->
+Compiled on `r date()`.
+
+```{r include = FALSE}
+library(DataComputing)
+```
+<!-- put your content after this line -->
+
+This data was downloaded from "http://tiny.cc/dcf/Library-small.rda" and the Bks data is from Macalester College about the usage of library materials, the Inv is from WorldCat and is about items in their collection.
+
+```{r, eval=FALSE}
+#download.file("http://tiny.cc/dcf/Library-small.rda", 
+              dest="Library-small.rda")
+```
+
+# Basics
+
+```{r}
+load("Library-small.rda")
+```
+
+## Bks
+- there are 3765 cases, each is a print book.
+- they aren't necessairly in Macalester's library, but they are in WorldCat
+- they all have three distinct call numbers
+- each case appears to be have a different "Oclc number" which is "a fixed-length, eight-digit number" (according to[this article](https://www.oclc.org/support/services/worldcat/documentation/tb/253.en.html)) which is basically like and ISBN
+
+```{r}
+nrow(Bks)
+names(Bks)
+unique(Bks$Format,nmax=5)
+
+```
+
+## Inv
+- This is Macalester's collection of books, they are all of type "Volume"
+- they also contain information on the last time they were counted and inventoried
+
+```{r}
+nrow(Inv)
+names(Inv)
+unique(Inv$Item.Type)
+
+```
+
+
+#Books with different statuses
+
+```{r}
+Inv %>% 
+  group_by(Current.Status) %>%
+  tally()
+```
+- the above command looks at the dataframe Inv and groups it into different categories according to their current status, it then counts up all cases that fall into each of these categories
+
+#How many times checked out
+
+```{r}
+Inv %>%
+  group_by(Issued.Count) %>%
+  tally()
+```
+
+
+- the above command looks at the dataframe Inv and groups it into different categories according to their how many times they were used, and like the command before, it then counts up all cases that fall into each of these categories. So there were 996 cases of things that were checked out 0 times, 337 that were checked out once, and there is one item that was checked out 239 times. Which is a bike, which makes sense because Mac is almost always out of bikes because they are so popular.
