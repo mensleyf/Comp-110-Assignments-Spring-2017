@@ -1,6 +1,6 @@
 # Week 2 Short Answer Questions
 
-## Your name should appear here!
+## Mira Ensley-Field
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,183 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+# Ch 1: 1.1, 1.2, 1.4, 1.5
+1.1 
+- Taffy = value (3)
+- year= quantitative (2)
+- sex = categorical (1)
+- name = categorical (1)
+- count = quantitative (2)
+
+1.2
+
+- the table columns don't represent one type of data, nor are the data always in the same format
+- there is a comma in Lincoln, Abraham but none of the others
+- the term length is two numbers and a dash or the word "to" instead they should perhaps be a start date, and end date, and the range as a single number (ie break it into three columns)
+- the last column is numeric for two and words "it depends" for a third
+
+1.4
+
+1. the variables in each table are the column headings
+- Data Table A: Year, Algeria, Brazil, Columbia
+- Data Table B: Country, Y2000, Y2001
+- Data Table C: Country, Year, Value
+
+2. 
+
+- Data Table A: a Year
+- Data Table B: a Country
+- Data Table C: a country in a year
+
+1.5
+
+- there are 5 variables
+- each case is a particular flight 
+
+#Ch 2: 2.2, 2.3, 2.4, 2.6, 2.7, 2.8, 2.8, 2.9, 2.10
+2.2
+- file name, name of argumen in named argument
+
+2.3
+- no such data set?
+```{r}
+library(mosaicData)
+data(CPS85,package = "mosaic")
+```
+
+
+2.4
+- use = instead of <-
+should be...
+
+"```{r,eval=FALSE}
+help(NHANES,package-"NHANES")
+```""
+
+2.6
+- "MyData" name can't start with quotes
+
+- small sample name can't have a space
+
+- .MyData name can't start with period
+
+- sqrt() this is a function, can't be a name
+
+
+2.7
+```{r, eval=FALSE}
+data(flights,package="nycflights13")
+View(flights)
+
+```
+- there are 19 variables
+
+- there are 336776 cases
+
+
+- a meaning is that one cases is one flight, each row represents a single flight
+- Quantitative variables:   "year"           "month"          "day"            "dep_time"       "sched_dep_time"      "dep_delay"      "arr_time"       "sched_arr_time"     "arr_delay    "flight"         "tailnum"             "dest"           "air_time"       "distance"       "hour"           "minute"         "time_hour"   
+
+- Qualitative variables:   "carrier"     "origin"      
+
+2.8
+
+a. 3. improper syntax
+
+b. 3. improper syntax
+
+c. 4. invalid object name
+
+d. 2. unmatched quotes
+
+c. 5. no mistake
+
+
+2.9
+
+- only "." and "_" can be used (period and underscore)
+
+2.10
+- 
+
+
+#Chapter 3 Questions
+
+##3.1
+- data frame: fireplace<- sample_n(Fireplace,size=100)
+- function: fireplace(logs,burn = True)
+- named arguemnt: cookCalculations<-burn(My_Data_Table, fuel = "fireplace", clients=100)
+- variable: fireplace<- My_Data_Table$campfire*10
+- 
+
+##3.2
+- The statement is missing has the data table (BabyNames) in the wrong spot...in chaining syntax it should be before the %>% and not in the parantheses
+
+
+##3.3
+- should be package=package_name... instead of package<-package_name
+
+
+##3.4 
+1. b.
+2. a.
+3. c.
+4. a.
+5. a.
+6. c.
+7. c.
+8. a.
+9. b.
+10. a.
+11. a.
+12. a. 
+13. a. 
+14. d.
+15. d.
+16. a.
+17. d.
+18. a.
+19. d.
+
+
+##3.5 
+- braintwt is the weight of the brain
+- there are 83 cases
+- a case is a unique piece of data that has the same underlying attribute
+- the levels of vore are carni, herbi, insecti, or omni
+
+
+##3.6
+- c.) is the different one because it is taking a mean, the rest are all doing count
+
+```
+
+##4.1
+1. *italic*
+2. **bold**
+3. #Heading
+4.`highlighted`
+6. ##Smaller Heading
+7.[link](https://xkcd.com/451/)
+
+##4.2
+a. need ` not '
+b. need ` not "
+c. need three ``` at the end not two
+d. need new lines for entry
+e. need three ``` at the end not four
+
+##4.3
+
+
+##4.4
+1. url
+2. file
+3. neither
+4. url
+5. neighter
+6. both
+
+##4.5
+
+
