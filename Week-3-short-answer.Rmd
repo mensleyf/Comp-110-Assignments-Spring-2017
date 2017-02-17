@@ -1,13 +1,185 @@
+---
+output: html_document
+---
 # Week 3 Short Answer Questions
 
-## Your name should appear here!
+## Mira Ensley-Field
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
 
 ```{r include = FALSE}
 library(DataComputing)
+library(mosaic)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+# Chapter 5
+
+5.1, 5.2
+
+```{r,eval=FALSE}
+barGraphHelper(CPS85)
+
+```
+
+```{r,eval=FALSE}
+
+
+
+#wage<-CPS85$wage
+#sex<-CPS85$sex
+bargraph(wage~sex, data=CPS85, main="NW",
+        xlab="sex", col=c("darkgrey","grey"),
+        legend = rownames(CPS85), beside=TRUE)
+```
+
+# Chapter 6
+
+6.5
+
+- b. State and Polling Organization
+
+6.6
+
+- d. glyph=rectangle, attributes=color and text
+
+6.7
+
+- c.
+
+6.8
+
+
+```{r}
+Small<-
+  NCHS %>%
+  sample_n(size=5000)
+
+scatterGraphHelper(Small)
+```
+
+
+
+# Chapter 7
+7.1
+- a.) summarise()
+- b.) transmute()
+- c.) order()
+- d.) filter()
+- e.) select()
+- f.) arrange()
+
+
+7.4 Finding the errors
+- a.)  no "" around First
+
+- b.) can't use BabyNames inside group_by, move to line before
+
+- c.) can't use BabyNames inside summarise, move to line before group_by
+
+```{r}
+Tmp<-
+  BabyNames %>%
+  group_by(year,sex) %>%
+  summarise(totalBirths=sum(count))
+
+```
+
+```{r}
+Total<-
+  BabyNames %>%
+summarise(num=sum(count))
+```
+
+7.5
+
+a.) Output Table A
+
+- filter(sex==F)
+
+- order(count)
+   
+b.) Output Table B
+
+- filter(sex==F)
+
+c.) Output Table C
+
+- filter(sex == M)
+
+- order (count)
+
+d.) Ouput Table D
+
+- summarise(totalBirhts=sum(count))
+
+e.) Output Table E
+
+- select(name,count)
+
+    
+7.7
+
+a.
+```{r}
+a<-
+  BabyNames %>%
+    group_by(year,sex) %>%
+    summarise(total=sum(count))
+
+```
+
+b.
+```{r}
+b<-
+  ZipGeography%>%
+    group_by(State) %>%
+    summarise(pop=sum(Population))
+
+```
+
+c.
+```{r}
+c<-
+  Minneapolis2013 %>%
+    group_by(First) %>%
+    summarise(voteReceived=n())
+
+```
+
+d.
+```{r}
+d<-
+  Minneapolis2013 %>%
+    group_by(First) %>%
+    summarise(voteReceived=n())
+
+```
+
+7.11
+
+a. you will get the number of female patients and their average age, and the number of male patients and their average age
+
+b. you will get the number of people with different diagnosises
+
+c.  you will get the number of females with different diagnosises  and their average age, and the number ofemales with different diagnosises  and their average age
+
+d. You will get the number and average age of everyone of the same age with a different diagnosis 
+
+e. the number of people with different ages
+
+
+7.12
+
+1. nrow()
+
+2. names()
+
+3. help() or View()
+
+4. library()
+
+5. group_by
+
+6. group_by() and  sum()
