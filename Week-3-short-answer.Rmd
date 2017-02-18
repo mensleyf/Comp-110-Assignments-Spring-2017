@@ -55,7 +55,9 @@ bargraph(wage~sex, data=CPS85, main="NW",
 Small<-
   NCHS %>%
   sample_n(size=5000)
+```
 
+```{r,eval=FALSE}
 scatterGraphHelper(Small)
 ```
 
@@ -63,12 +65,12 @@ scatterGraphHelper(Small)
 
 # Chapter 7
 7.1
-- a.) summarise()
-- b.) transmute()
-- c.) order()
+- a.) summarise() and mean()
+- b.) summarise() and /
+- c.) arrange()
 - d.) filter()
-- e.) select()
-- f.) arrange()
+- e.) filter()
+- f.) select()
 
 
 7.4 Finding the errors
@@ -98,17 +100,15 @@ a.) Output Table A
 
 - filter(sex==F)
 
-- order(count)
+- arrange(count,sex)
    
 b.) Output Table B
 
-- filter(sex==F)
+- arrange(sex)
 
 c.) Output Table C
 
-- filter(sex == M)
-
-- order (count)
+- arrange(-sex,count)
 
 d.) Ouput Table D
 

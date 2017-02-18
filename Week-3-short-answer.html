@@ -124,7 +124,7 @@ $(document).ready(function () {
 <div id="mira-ensley-field" class="section level2">
 <h2>Mira Ensley-Field</h2>
 <!-- leave this material as is -->
-<p>Compiled on Fri Feb 17 17:04:55 2017.</p>
+<p>Compiled on Sat Feb 18 14:38:18 2017.</p>
 <!-- put your content after this line -->
 </div>
 </div>
@@ -140,19 +140,33 @@ bargraph(wage~sex, data=CPS85, main=&quot;NW&quot;,
 </div>
 <div id="chapter-6" class="section level1">
 <h1>Chapter 6</h1>
-<p>6.5 - b. State and Polling Organization</p>
-<p>6.6 - d. glyph=rectangle, attributes=color and text</p>
-<p>6.7 - c.</p>
+<p>6.5</p>
+<ul>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>State and Polling Organization</li>
+</ol></li>
+</ul>
+<p>6.6</p>
+<ul>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>glyph=rectangle, attributes=color and text</li>
+</ol></li>
+</ul>
+<p>6.7</p>
+<ul>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li></li>
+</ol></li>
+</ul>
 <p>6.8</p>
 <pre class="r"><code>Small&lt;-
   NCHS %&gt;%
-  sample_n(size=5000)
-
-#scatterGraphHelper(Small)</code></pre>
+  sample_n(size=5000)</code></pre>
+<pre class="r"><code>scatterGraphHelper(Small)</code></pre>
 </div>
 <div id="chapter-7" class="section level1">
 <h1>Chapter 7</h1>
-<p>7.1 - a.) summarise() - b.) transmute() - c.) order() - d.) filter() - e.) select() - f.) arrange()</p>
+<p>7.1 - a.) summarise() and mean() - b.) summarise() and / - c.) arrange() - d.) filter() - e.) filter() - f.) select()</p>
 <p>7.4 Finding the errors - a.) no “” around First</p>
 <ul>
 <li><p>b.) can’t use BabyNames inside group_by, move to line before</p></li>
@@ -169,16 +183,15 @@ summarise(num=sum(count))</code></pre>
 <p>a.) Output Table A</p>
 <ul>
 <li><p>filter(sex==F)</p></li>
-<li><p>order(count)</p></li>
+<li><p>arrange(count,sex)</p></li>
 </ul>
 <p>b.) Output Table B</p>
 <ul>
-<li>filter(sex==F)</li>
+<li>arrange(sex)</li>
 </ul>
 <p>c.) Output Table C</p>
 <ul>
-<li><p>filter(sex == M)</p></li>
-<li><p>order (count)</p></li>
+<li>arrange(-sex,count)</li>
 </ul>
 <p>d.) Ouput Table D</p>
 <ul>
