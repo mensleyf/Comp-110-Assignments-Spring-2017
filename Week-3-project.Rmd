@@ -11,11 +11,11 @@ library(DataComputing)
 <!-- put your content after this line -->
 
 ```{r}
-ggplot(data = NCHS, aes(x = bmi)) + geom_density(aes(color="red",fill=TRUE))+ facet_wrap(sex~pregnant)
+ggplot(data = NCHS, aes(x = bmi)) + geom_density(aes(color=sex,fill=TRUE))+ facet_wrap(~pregnant)
 ```
 
 
-I haven't figured out how to make the graphic that appears in the in class example yet..it has colored density according to gender, and overlays non-pregnnt females and makes.
+This is similar to the graph in the html questions page
 
 What mode of graphic is it? (e.g. density plot, scatter plot, bar plot, …)
 
@@ -32,13 +32,13 @@ What role each of those variables plays in the graphic?
 
 In Figure 2, why is there no data variable being used for the yy-axis?
 
-- there is only one figure that I can see...
+- there is only one figure that I can see...?
 
 PLaying with graphs 
 ```{r}
-ggplot(data = NCHS, aes(x = income)) + geom_density(aes(color="blue",fill=TRUE))+ facet_wrap(sex~pregnant)
-```
 
+ggplot(data = NCHS, aes(x = income), title="income distribution by sex and poverty line") + geom_density(aes(color=sex,fill=TRUE))  + geom_vline(xintercept=1,show.legend=TRUE)
+```
 
 # Wrangling
 
@@ -86,12 +86,18 @@ top_candidates <-
 top_five_candidates<-head(top_candidates,6)
 ```
 1       BETSY HODGES   14399
+
 2        DON SAMUELS   14170
+
 3        MARK ANDREW   12757
+
 5 JACKIE CHERRYHOMES    6470
+
 6           BOB FINE   	3751	
-How many ballots are marked “undervote” in
-First choice selections? 834
+
+How many ballots are marked “undervote” inFirst choice selections? 
+
+834
 
 ```{r}
 undervote_first <-
@@ -101,7 +107,9 @@ undervote_first <-
  summarise(votes=count(First)) 
 
 ```
-Second choice selections? 10,598
+Second choice selections? 
+
+10,598
 
 ```{r}
 undervote_second <-
@@ -125,8 +133,11 @@ undervote_third <-
 What are the top 3 Second vote selections among people who voted for Betsy Hodges as their first choice?
 
 1        MARK ANDREW  8787
+
 2        DON SAMUELS  8743
+
 3 JACKIE CHERRYHOMES  2563
+
 
 ```{r}
 besty_supporters<-
