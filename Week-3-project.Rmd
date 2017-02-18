@@ -1,6 +1,6 @@
 # Week 3 Project
 
-## Your name should appear here! 
+## Mira Ensley-Field
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,146 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+```{r}
+ggplot(data = NCHS, aes(x = bmi)) + geom_density(aes(color="red",fill=TRUE))+ facet_wrap(sex~pregnant)
+```
+
+
+I haven't figured out how to make the graphic that appears in the in class example yet..it has colored density according to gender, and overlays non-pregnnt females and makes.
+
+What mode of graphic is it? (e.g. density plot, scatter plot, bar plot, …)
+
+- density plot
+
+What variables from the respective data tables are involved?
+
+- sex, pregnat, bmi
+
+What role each of those variables plays in the graphic?
+
+- looking at distribution of bmi according to gender and pregnancy status
+
+
+In Figure 2, why is there no data variable being used for the yy-axis?
+
+- there is only one figure that I can see...
+
+PLaying with graphs 
+```{r}
+ggplot(data = NCHS, aes(x = income)) + geom_density(aes(color="blue",fill=TRUE))+ facet_wrap(sex~pregnant)
+```
+
+
+# Wrangling
+
+Which color diamonds seem to be largest on average (in terms of carats)?
+```{r}
+largest_diamonds_color<-
+  diamonds %>%
+  group_by(color) %>%
+  summarise(size=mean(carat)) %>%
+  arrange(-size)
+
+```
+ the "j" color are the largest on average (1.1.6 carats)
+ 
+ 
+Which clarity of diamonds has the largest average “table” per carat?
+```{r}
+largest_clarity_table<-
+  diamonds %>%
+  group_by(clarity) %>%
+  summarise(size=mean(table),weight=mean(carat)) %>%
+  arrange(-size/weight)
+
+```
+
+#Voting
+
+Using the Minneapolis2013 data table, answer these questions. summarise(), group_by(), and tally() will be useful in answering the questions.
+
+How many cases are there? 80,101
+```{r}
+nrow(Minneapolis2013)
+```
+
+Who were the top 5 candidates in the Second vote selections.
+
+```{r}
+
+top_candidates <-
+  Minneapolis2013 %>%
+  group_by(Second) %>%
+ summarise(seconds=count(Second)) %>%
+  arrange(-seconds)
+
+top_five_candidates<-head(top_candidates,6)
+```
+1       BETSY HODGES   14399
+2        DON SAMUELS   14170
+3        MARK ANDREW   12757
+5 JACKIE CHERRYHOMES    6470
+6           BOB FINE   	3751	
+How many ballots are marked “undervote” in
+First choice selections? 834
+
+```{r}
+undervote_first <-
+  Minneapolis2013 %>%
+  group_by(First) %>%
+  filter(First == "undervote") %>%
+ summarise(votes=count(First)) 
+
+```
+Second choice selections? 10,598
+
+```{r}
+undervote_second <-
+  Minneapolis2013 %>%
+  group_by(Second) %>%
+  filter(Second == "undervote") %>%
+ summarise(votes=count(Second)) 
+
+```
+Third choice selections? 19,210
+
+```{r}
+undervote_third <-
+  Minneapolis2013 %>%
+  group_by(Third) %>%
+  filter(Third == "undervote") %>%
+ summarise(votes=count(Third)) 
+
+```
+
+What are the top 3 Second vote selections among people who voted for Betsy Hodges as their first choice?
+
+1        MARK ANDREW  8787
+2        DON SAMUELS  8743
+3 JACKIE CHERRYHOMES  2563
+
+```{r}
+besty_supporters<-
+  Minneapolis2013 %>%
+  filter(First == "BETSY HODGES") %>%
+  group_by(Second) %>%
+  summarise(votes=count(Second)) %>%
+  arrange(-votes)
+
+besty_supporters_top3<-head(besty_supporters,3)
+```
+
+Which Precinct had the highest fraction of First vote selections marked as “undervote”? (To calculate the fraction, use mean(First == "undervote") in the argument to summarise().)
+
+  P-05A
+
+```{r}
+high_undervote<-
+  Minneapolis2013 %>%
+  group_by(Precinct) %>%
+  summarise(undervotes=count(First =="undervote"), total=count(First)) %>%
+  arrange(-undervotes/total)
+
+
+```
+
