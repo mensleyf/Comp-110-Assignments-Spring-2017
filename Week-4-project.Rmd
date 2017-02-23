@@ -1,6 +1,6 @@
 # Week 4 Project
 
-## Your name should appear here!
+## Mira Ensley-Field
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -11,3 +11,139 @@ library(DataComputing)
 <!-- put your content after this line -->
 
 Here is my content!
+# 1
+```{r}
+DailyBirths<-
+  Birthdays %>%
+  group_by(date) %>%
+  summarise(total=sum(births))
+
+ggplot(data = DailyBirths, aes(x = date, y=total)) + geom_point(data=DailyBirths, aes(x=date,y=total))
+```
+
+# 2
+```{r}
+#library(lubridate)
+
+DailyBirths<-
+  Birthdays %>%
+  mutate(weeks=week(date)) %>%
+  group_by(weeks) %>%
+  summarise(total=sum(births))
+
+
+ggplot(data = DailyBirths, aes(x = weeks, y=total)) + geom_point(data=DailyBirths, aes(x=weeks,y=total))
+
+```
+
+```{r}
+#library(lubridate)
+
+DailyBirths<-
+  Birthdays %>%
+  mutate(months=month(date)) %>%
+  group_by(months) %>%
+  summarise(total=sum(births))
+
+
+ggplot(data = DailyBirths, aes(x = months, y=total)) + geom_point(data=DailyBirths, aes(x=months,y=total))
+
+```
+
+```{r}
+#library(lubridate)
+
+DailyBirths<-
+  Birthdays %>%
+  mutate(jdays=yday(date)) %>%
+  group_by(jdays) %>%
+  summarise(total=sum(births))
+
+
+ggplot(data = DailyBirths, aes(x = jdays, y=total)) + geom_point(data=DailyBirths, aes(x=jdays,y=total))
+
+```
+
+# 3
+
+```{r}
+DailyBirths<-
+  Birthdays %>%
+  mutate(weekday=wday(date, label = TRUE)) %>%
+  group_by(weekday) %>%
+  summarise(total=sum(births))
+
+
+ggplot(data = DailyBirths, aes(x = weekday, y=total)) + geom_point(data=DailyBirths, aes(x=weekday,y=total))
+
+```
+
+# 4
+
+```{r}
+MyTwoYears<-
+  Birthdays %>%
+  filter(year %in% c(1980,1981)) %>%
+  group_by(date,wday) %>%
+  mutate(doy=yday(date)) %>%
+  summarise(total=sum(births))
+  
+  
+ggplot(data = MyTwoYears, aes(x = date, y=total)) + geom_point(data=MyTwoYears, aes(x=date,y=total,col=wday))
+
+```
+Explain the Pattern:
+
+- Sunday and Saturday overall have very low birth rates compared to weekdays, almost as if babies and mothers prefer births to happen on weekdays. This is likely because roughly 1/3 of all births are C sections, which means they can be scheduled, and they are more liekly to be scheduled for weekdays versus weekends. There also appears to be some overall seasonal patterns, that are more than just different days. Both years seem to have a peak in births in August/September. I have no idea why, but when I googled it I read that some health researchers believe it may simply be because in 9 months previous people are bored because it's cold outside and they're spending so much more time inside.
+```{r}
+Holidays <- read.csv("http://tiny.cc/dcf/US-Holidays.csv") %>%
+  mutate(date = as.POSIXct(lubridate::dmy(date)))
+
+filteredHolidays <- 
+  Holidays %>% 
+  filter(year(date) %in% c(1980,1981)) %>%
+  mutate(weekday=wday(date))
+
+MyTwoYears<-
+  Birthdays %>%
+  filter(year %in% c(1980,1981)) %>%
+  group_by(date,wday) %>%
+  mutate(doy=yday(date)) %>%
+  summarise(total=sum(births)) %>%
+  mutate(is_holiday=date %in% Holidays$date) %>%
+  mutate(when = ifelse(is_holiday, Birthdays$date, 0))
+
+
+ggplot(data = MyTwoYears, aes(x = date, y=total)) + geom_line(aes(color=wday)) + geom_text(data=filteredHolidays,aes(x=date,label=holiday),y=10000,angle=80,size=4) + geom_vline(data=filteredHolidays,aes(xintercept=as.numeric(date)))
+```
+
+#7
+
+Lower Births on holidays
+
+```{r}
+MyTwoYears<-
+  Birthdays %>%
+  filter(year %in% c(1980,1981)) %>%
+  group_by(date,wday) %>%
+  mutate(doy=yday(date)) %>%
+  summarise(total=sum(births)) %>%
+  mutate(is_holiday=date %in% Holidays$date) %>%
+  mutate(when = ifelse(is_holiday, Birthdays$date, 0))
+
+MyTwoYearsFiltered<-
+  Birthdays %>%
+  filter(year %in% c(1980,1981)) %>%
+  group_by(date,wday) %>%
+  mutate(doy=yday(date)) %>%
+  summarise(total=sum(births)) %>%
+  mutate(is_holiday=date %in% Holidays$date) %>%
+  filter(is_holiday==TRUE)
+
+ggplot(data = MyTwoYears, aes(x = date, y=total)) +geom_line(aes(color=wday))+ geom_point(data=MyTwoYearsFiltered, aes(x=date,y=total,size=total,col=wday))
+
+
+
+
+
+```
