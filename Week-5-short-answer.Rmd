@@ -1,6 +1,6 @@
 # Week 5 Short Answer Questions
 
-## Your name should appear here!
+## Mira Ensley-Field
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -8,6 +8,69 @@ Compiled on `r date()`.
 ```{r include = FALSE}
 library(DataComputing)
 ```
-<!-- put your content after this line -->
 
-Here is my content!
+# Chapter 10
+
+10.1
+
+- join data verbs always have a table as an input argument because they act only on data tables, and they need two data table inputs because they are comparing them. Other data verbs need to act on only one data table at a time, which is specified at the beginning of the experession, outside the parentheses
+
+10.2
+
+- the two tables can't be combined succesfully just by copying latitude and longitude because they don't ligh up perfectly. One has 256 rows and the other has 241, we can see that even by the second row, the names of the countries differ, one dataset has Akrotiri and the other has Aland, so the latitude and longitude data won't stay connected to the country it descrives if you just set the two tables alongside one another
+
+
+
+10.3
+- I think that the second data table would make finding the change from 200 to 2001 easiest, I would do it by adding another column with mutate that was the Y2001 column - the Y2000 column. Each case is a country, so I would just need to add another column
+
+- With a data table called continent where each case was a country that also had which continent it was a part of, the easiest way to count up the sum for each continent would be to join it with the second Data Table, where each country is also a case. I would do a left_join (with Data Table B being the left  Data Table) and then each country and its Y2000 and Y2001 would be associated with a continent, I could then very easily do group_by(country) and summarize to find the sum for each contient
+
+
+
+#Chapter 11
+
+11.1
+a.
+
+- Version 1: a case is one name that is for either male of female (not both) in that year
+- Version 2: a case is a name in a particular year that includes the number of male and female babies who have it
+- Version 3: A case is a name that is either female or male (not both) with the two years as additional columns
+
+b.
+
+- Version Two is narrow compared to version 1
+
+c.
+
+- the key from the narrow table being used is sex
+
+d.
+- there are NAs because there are cases when  a particular sex or year didn't have any babies with that name
+
+e. they can contain the same information because the information is arranged differently in each table, in terms of what information is stored by the columns and what a row represents
+
+f. version three was spread from version one using year as a variable
+
+g. version 1 can be created by gathering columns in version 2
+- female, male, and n babies
+- key = nbabies
+- values = F,M
+
+11.3
+
+- A vs C: A is wide
+
+- B cs C: C is wide
+
+- A vs B: A is wide
+
+
+
+11.4 (sketched out on paper)
+
+11.5 
+```{r}
+"http://tiny.cc/dcf/MeasTreatTables.rda" %>% url() %>% load()
+
+```
