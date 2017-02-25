@@ -23,15 +23,16 @@ barGraphHelper(CPS85)
 
 ```
 
-```{r,eval=FALSE}
+
+I couldn't figure out how to do facet wrapping so I added that directly in R
+```{r}
+ggplot(data=CPS85,aes(x=sex,y=wage ,fill=married))+geom_bar(stat='identity',position='dodge', width=.9) + facet_wrap(~race)
+
+```
 
 
-
-#wage<-CPS85$wage
-#sex<-CPS85$sex
-bargraph(wage~sex, data=CPS85, main="NW",
-        xlab="sex", col=c("darkgrey","grey"),
-        legend = rownames(CPS85), beside=TRUE)
+```{r}
+WorldMap(HappinessIndex,key=country,fill=corruption)
 ```
 
 # Chapter 6
@@ -61,12 +62,20 @@ Small<-
 scatterGraphHelper(Small)
 ```
 
+```{r}
+ggplot(data=Small,aes(x=bmi,y=weight))+geom_point()+aes(colour=smoker) 
+```
+Mapping:
+color<-smoker
+x axis<- bmi
+y axis<- weight
 
 
 # Chapter 7
 7.1
 - a.) summarise() and mean()
-- b.) summarise() and /
+
+- b.) mutate()
 - c.) arrange()
 - d.) filter()
 - e.) filter()
