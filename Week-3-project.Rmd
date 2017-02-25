@@ -10,12 +10,36 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
+# Graphic 1.
+```{r}
+ggplot(data = CPS85, aes(x = exper), y=wage) + geom_point(aes(x=exper,y=wage,color=married))  + facet_wrap(~sector)
+```
+What mode of graphic is it?
+
+- this is a scatter plot (geom_point)
+
+What variables from the respective data tables are involved?
+
+- exper, married, wage, and sector are all involved
+
+What role each of those variables plays in the graphic?
+
+- exper defines the x axis
+
+- sector defines the y axis
+
+- married defines the color of each data point
+
+- facet wrapping causes each sector to be displayed in a separate graph
+
+
+#Graphic 2
+(I couldn't get the graphic to match exactly)
+
 ```{r}
 ggplot(data = NCHS, aes(x = bmi)) + geom_density(aes(color=sex,fill=TRUE))+ facet_wrap(~pregnant)
 ```
 
-
-This is similar to the graph in the html questions page
 
 What mode of graphic is it? (e.g. density plot, scatter plot, bar plot, …)
 
@@ -23,21 +47,26 @@ What mode of graphic is it? (e.g. density plot, scatter plot, bar plot, …)
 
 What variables from the respective data tables are involved?
 
-- sex, pregnat, bmi
+- sex, pregnant, bmi
 
 What role each of those variables plays in the graphic?
 
-- looking at distribution of bmi according to gender and pregnancy status
+- the bmi is counted up separetly for different sexes and different pregnancy statuses
 
+- makes and females are also displayed in different graphs
 
-In Figure 2, why is there no data variable being used for the yy-axis?
+- pregnancy status is also counted up separately and displayed in a different graph
 
-- there is only one figure that I can see...?
+- bmi is on the x axis, frequency is on the y
+
+In Figure 2, why is there no data variable being used for the y-axis?
+
+- the frequency of that particular bmi is on the y axis
 
 PLaying with graphs 
 ```{r}
 
-ggplot(data = NCHS, aes(x = income), title="income distribution by sex and poverty line") + geom_density(aes(color=sex,fill=TRUE))  + geom_vline(xintercept=1,show.legend=TRUE)
+ggplot(data = NCHS, aes(x = income), title="income distribution by sex and poverty line") + geom_density(aes(color=sex,fill=TRUE))  + geom_vline(xintercept=1)
 ```
 
 # Wrangling
