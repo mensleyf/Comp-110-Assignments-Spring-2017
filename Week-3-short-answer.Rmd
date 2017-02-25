@@ -3,7 +3,7 @@ output: html_document
 ---
 # Week 3 Short Answer Questions
 
-## Mira Ensley-Field
+## Mira Ensley-Field 
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
