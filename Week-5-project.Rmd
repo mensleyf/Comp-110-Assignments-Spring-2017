@@ -1,6 +1,6 @@
 # Week 5 Project
 
-## Your name should appear here!
+## Mira Ensley-Field
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,33 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+```{r}
+download.file("http://tiny.cc/dcf/ScorecardSmall.Rda", 
+              destfile = "ScorecardSmall.Rda")
+load("ScorecardSmall.Rda")
+
+
+```
+
+
+```{r}
+new<-
+  ScorecardSmall %>%
+  filter(CONTROL!=3) %>%
+  filter(!CCSIZSET %in% c(1,6,7,8)) %>%
+  select(CONTROL, NPT41_PUB,     NPT43_PUB, NPT45_PUB,  NPT41_PRIV, NPT43_PRIV,        NPT45_PRIV,ADM_RATE,CCSIZSET ) %>%
+  gather(key=quintile, value=Net_Cost, NPT41_PUB,     NPT43_PUB, NPT45_PUB,  NPT41_PRIV, NPT43_PRIV, NPT45_PRIV )
+
+NPT4_names<-read.csv("/home/local/MAC/mensleyf/R/Comp-110-Assignments-Spring-2017/NPT4-names.csv")
+
+new_joined<-
+  new %>%
+  left_join(NPT4_names, by = c("quintile" = "long_name"))
+
+```
+
+```{r}
+ggplot(data=new_joined,aes(x=ADM_RATE,y=Net_Cost)) + geom_point(col="light blue") +  facet_wrap(~short_name+CONTROL) +geom_smooth(method="loess", col="black")
+
+```
+
