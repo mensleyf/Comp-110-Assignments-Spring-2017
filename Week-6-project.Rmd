@@ -1,6 +1,6 @@
 # Week 6 Project
 
-## Your name should appear here!
+## Mira Ensley-Field
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -8,6 +8,92 @@ Compiled on `r date()`.
 ```{r include = FALSE}
 library(DataComputing)
 ```
-<!-- put your content after this line -->
 
-Here is my content!
+```{r, cache=TRUE}
+data_site <- 
+  "http://tiny.cc/dcf/2014-Q4-Trips-History-Data-Small.rds" 
+Trips <- readRDS(gzcon(url(data_site)))
+```
+
+# 1
+
+```{r}
+Trips %>% ggplot(aes(x=sdate))+geom_density(aes(x=sdate),fill="light blue")
+
+```
+
+People seem to be biking less as it gets colder. Not sure about the uptick in mid December--perhaps a warm spell?
+
+
+#2 A density plot of the events versus sdate. Use ggplot() and geom_density().
+```{r}
+Date_Trips <-
+  Trips %>% 
+  mutate(time_of_day = 
+       lubridate::hour(sdate) + 
+         lubridate::minute(sdate) / 60,label=TRUE) %>%
+  group_by(time_of_day)
+
+Date_Trips %>% ggplot(aes(x=time_of_day))+geom_density(aes(x=time_of_day),fill="light green")
+
+
+```
+Usage has a bimodal-ish peak in the morning and evening. I'd imagine this is people who rent a bike to go to work and then perhaps recreational users later in the day join people who are also  commuting home.
+
+# 3 
+```{r}
+Date_Trips_week <-
+  Date_Trips %>% 
+  mutate(week_day = 
+       lubridate::wday(sdate,label=TRUE))
+
+
+Date_Trips_week %>% ggplot(aes(x=time_of_day))+geom_density(aes(x=time_of_day),fill="purple") + facet_wrap(~week_day)
+
+```
+
+Most days have a type of bimodal popularity of bicycle usage, but on the weekends people sleep in and don't check out bikes till the late morning and afternoon. On weekdays, people must be commuting to and from work, but on weekends, there are no commuters. You can see people getting home late at night on Fridays and Saturdays.
+
+# 4
+
+```{r}
+Date_Trips_week %>% ggplot(aes(x=time_of_day))+
+  geom_density(aes(fill = client),alpha=.5,color=NA) + 
+  facet_wrap(~week_day)
+```
+The casual users don't seem to have a big difference in usage on weekdays vs weekends. My guess is that causal users tend to be people who only use the service occasionally, perhaps they are tourists, or usually drive to work and are taking a day off for a change. Registered users seem to have a pattern that follows commute times on weekdays, but is more similar to causal users on weekends, but they stay up later.
+
+#5
+```{r}
+Date_Trips_week %>% ggplot(aes(x=time_of_day))+
+  geom_density(aes(fill = client),alpha=.5,color=NA, position = position_stack()) + 
+  facet_wrap(~week_day)
+```
+
+I find this a little harder to understand than in #4...It is less immediately intuitive the difference between the sheer numbers of casual and registered users, and it allows the more numerous patern to dominate. For instance, I cannot tell that the weekday casual user doesn't have a bimodal pattern because it is being forced by the registered user.
+
+# 6
+
+```{r}
+
+Date_Trips_new <-
+  Date_Trips_week %>%
+    mutate(wday = ifelse(lubridate::wday(sdate) %in% c(1,7), "weekend", "weekday"))
+
+
+Date_Trips_new %>% ggplot(aes(x=time_of_day))+
+  geom_density(aes(fill = client),alpha=.5,color=NA, position = position_stack()) + 
+  facet_wrap(~wday)
+```
+
+
+
+client and weekday reversed
+
+```{r}
+
+Date_Trips_new %>% ggplot(aes(x=time_of_day))+
+  geom_density(aes(fill = wday),alpha=.5,color=NA)  + 
+  facet_wrap(~client)
+```
+I think it is a matter of preference, but I find it easier to detect the weekend and weekday pattern in the previous graph. However, that being said, this is still a useful graphic because it makes it very clear that only registered users have a different pattern depending on weekend and weekday, which is a plus.
