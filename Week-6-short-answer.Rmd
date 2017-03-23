@@ -13,10 +13,6 @@ library(DataComputing)
 
 # 12.1 : for each sex find the 5 most popular babyNames adding up over all the years
 
-# My computer was having a hard time working with the entire data set, so I separated it into a smaller subsection--this quite likely may change some of the answers (sorry!) but I hope you can see my methods. I will resubmit if possible later with complete data set!
-
-# Thanks!
-
 This was used for testing purposes
 ```{r}
 BabyNames_small<-sample(BabyNames,10000,replace=FALSE)
