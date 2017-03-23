@@ -11,7 +11,7 @@ library(DataComputing)
 
 # Chapter 12
 
-# 12.1 : for each sex find the 5 most popular babyNames adding up over all the years
+12.1 : for each sex find the 5 most popular babyNames adding up over all the years
 
 This was used for testing purposes
 ```{r}
@@ -42,24 +42,35 @@ Top 5 Female Names
 - Linda
 
 #12.2
-
-I couldn't seem to figure out  how to gather into the correct format
+I was able to create the first part of the data table (Below) and I created a graphic with that
 ```{r}
-fraction<-
+PopularCounts<-
   BabyNames_small %>%
   group_by(year)  %>%
   summarise(total=sum(count)) %>%
-  mutate(frac_in_top_100=(total/2)) %>%
-  gather()
+  mutate(frac_in_top_100=(total/2)) 
 
+PopularCounts[1:10,]
   
 ```
 
-```{r,eval=FALSE}
+```{r}
+ggplot(data=PopularCounts, aes(x=year, y =frac_in_top_100)) + geom_point(aes(x=year, y =frac_in_top_100,size=total,col=year))
+
+```
+
+The code egiven in the book doesn't seem to work..I tried a few variations but unfortunately I couldn't get their mutate function to work correctly. I tried to fix the format by gathering (the commented out section, but I couldn't get it to work)
+
+
+
+```{r}
 glyph<-
   PopularCounts %>%
   spread(frac_in_top_100,total) %>%
-  mutate(frac_in_top_100 = 'TRUE' / ('True' + 'FALSE'))
+  mutate(frac_in_top_100 = TRUE / (TRUE + FALSE)) # %>%
+  #gather(key=count,value=-year )
+
+glyph[1:10,]
 ```
 
 

@@ -55,10 +55,6 @@ ggplot(data=table2,aes(y=`Net Capcity in MW`, x=Start_Date,color=`Reactor Type`)
 
 
 Second graph
-
-Construction delays
-Make an informative graphic that shows how long it took between start of construction and commissioning for each nuclear reactor in Japan (or another country of your choice). One possibility: use reactor name vs date as the frame. For each reactor, set the glyph to be a line extending from start of construction to commissioning. You can do this with geom_segment() using name as the y coordinate and time as the x coordinate.
-
 ```{r}
 
 ggplot(data=table2,aes(y=ID, x=Start_Date,color=`Reactor Type`)) + 
