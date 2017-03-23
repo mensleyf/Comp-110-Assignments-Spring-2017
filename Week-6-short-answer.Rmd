@@ -1,6 +1,6 @@
 # Week 6 Short Answer Questions
 
-## Your name should appear here!
+## Mira Ensley-Field
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -8,6 +8,103 @@ Compiled on `r date()`.
 ```{r include = FALSE}
 library(DataComputing)
 ```
-<!-- put your content after this line -->
 
-Here is my content!
+# Chapter 12
+
+# 12.1 : for each sex find the 5 most popular babyNames adding up over all the years
+
+# My computer was having a hard time working with the entire data set, so I separated it into a smaller subsection--this quite likely may change some of the answers (sorry!) but I hope you can see my methods. I will resubmit if possible later with complete data set!
+
+# Thanks!
+
+This was used for testing purposes
+```{r}
+BabyNames_small<-sample(BabyNames,10000,replace=FALSE)
+```
+
+```{r}
+Popular<-
+  BabyNames %>%
+  group_by(name,sex) %>%
+  summarise(total=sum(count)) %>%
+  mutate(the_rank=rank(desc(total))) %>%
+  arrange(-total)
+```
+
+Top 5 Male Names
+- James
+- John
+- Robert
+- Michael
+- William
+
+Top 5 Female Names
+- Mary
+- Elizabeth
+- Patricia
+- Jennifer
+- Linda
+
+#12.2
+
+I couldn't seem to figure out  how to gather into the correct format
+```{r}
+fraction<-
+  BabyNames_small %>%
+  group_by(year)  %>%
+  summarise(total=sum(count)) %>%
+  mutate(frac_in_top_100=(total/2)) %>%
+  gather()
+
+  
+```
+
+```{r,eval=FALSE}
+glyph<-
+  PopularCounts %>%
+  spread(frac_in_top_100,total) %>%
+  mutate(frac_in_top_100 = 'TRUE' / ('True' + 'FALSE'))
+```
+
+
+#12.3
+
+a.) transformation verb: rank
+
+b.) transformation verb: rank
+
+c.) summary function: nrow
+
+d.) summary function: nrow (if leap year, then fewer cases)
+
+e.) neither
+
+f.) summary function: range
+
+g.) neither...probably use lucidate package
+
+h.) summary function
+
+#13.1
+
+1. There are 8 distinct vertices
+
+2. there are 9 edges
+
+#13.2
+
+1. The certices are the letters A,B,C, and D
+
+2. Table 2 shows them correcly
+
+3. Table 1 has incorrect edges...B and C aren't connected and Table 3 is a completey incorrect configuration
+
+#13.3
+
+Table 2
+
+#13.4
+
+1. the size of the letter is mapped to exports
+
+2. pop is mapped to the shape of the gray symbol

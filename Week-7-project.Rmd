@@ -1,6 +1,6 @@
 # Week 7 Project
 
-## Your name should appear here!
+## Mira Ensley-Field
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,60 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+```{r}
+library(rvest)
+library(lubridate)
+page <- "http://en.wikipedia.org/wiki/List_of_nuclear_reactors"
+table_nodes <- page %>%
+  read_html() %>%
+  html_nodes("table")
+table_list <-
+  html_table(table_nodes[1:30], fill = TRUE)
+```
+
+```{r}
+table = (table_list[[24]])
+```
+
+```{r}
+new_names <- c(names(table))
+new_names[3]<-"Reactor Type"
+new_names[4]<-"Reactor Model"
+new_names[6]<-"Net Capcity in MW"
+new_names[7]<-"Gross Capacity in MW"
+
+names(table) <- new_names # reset the variable names
+table <- table[-1, ] # drop the first row
+```
+
+
+Change date format
+```{r}
+table2 <-
+  table %>%
+    mutate(Start_Date = lubridate::dmy(`Construction Start Date`)) %>%
+    mutate(Operate_Date = lubridate::dmy(`Commercial Operation Date`)) %>%
+  mutate(ID = paste(Name, `Reactor No.`))
+
+```
+
+First graph
+```{r}
+ggplot(data=table2,aes(y=`Net Capcity in MW`, x=Start_Date,color=`Reactor Type`)) + geom_point(aes(y=`Net Capcity in MW`, x=Start_Date,color=`Reactor Type`))
+
+```
+
+
+Second graph
+
+Construction delays
+Make an informative graphic that shows how long it took between start of construction and commissioning for each nuclear reactor in Japan (or another country of your choice). One possibility: use reactor name vs date as the frame. For each reactor, set the glyph to be a line extending from start of construction to commissioning. You can do this with geom_segment() using name as the y coordinate and time as the x coordinate.
+
+```{r}
+
+ggplot(data=table2,aes(y=ID, x=Start_Date,color=`Reactor Type`)) + 
+  geom_segment(aes(y=ID, x=Start_Date, xend = Operate_Date, yend =ID, group = `Reactor No.`, color=`Reactor Type`))
+
+```
+
+
