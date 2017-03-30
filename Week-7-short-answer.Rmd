@@ -86,6 +86,7 @@ i2<-tidyr::extract_numeric(i)
 ```
 
 **as.numeric** will work only on h
+
 **extract_numer** will work on a, b, d, e,f, i
 
 #16.1 
