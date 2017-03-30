@@ -1,13 +1,173 @@
 # Week 7 Short Answer Questions
 
-## Your name should appear here!
+## Mira Ensley-Field
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
 
 ```{r include = FALSE}
 library(DataComputing)
+library(lubridate)
+library(stringr)
 ```
-<!-- put your content after this line -->
 
-Here is my content!
+#15.1
+1.) Gauss
+```{r}
+Mira_bday<-mdy("September 28, 1995")
+orig1<-"April 30, 1777"
+new1<-mdy(orig1)
+interval1<-Mira_bday-new1
+print(interval1)
+```
+2.) Turing
+```{r}
+orig2<-"06-23-1912"
+new2<-mdy(orig2)
+interval2<-Mira_bday-new2
+print(interval2)
+```
+3.)Bell
+```{r}
+orig3<-"3 March 1847"
+new3<-dmy(orig3)
+interval3<-Mira_bday-new3
+print(interval3)
+```
+4.)Armistice of WW1
+```{r}
+orig4<-"11:00 am on Nov. 11th,1918 at 11:00am"
+tweak4<-substring(orig4,13,26)
+new4<-mdy(tweak4)
+interval4<-Mira_bday-new4
+print(interval4)
+```
+5.) moon!
+```{r}
+orig5<-"July 20, 1969"
+new5<-mdy(orig5)
+interval5<-Mira_bday-new5
+print(interval5)
+```
+
+#15.2
+
+```{r,hide=TRUE,eval=FALSE}
+a<-"42,659.30"
+b<-"17%"
+c<-"Nineteen"
+d<-"L100"
+e<-"9.8 m/sec"
+f<-"9.8 m/s^2"
+g<-"6.6206857 x 10^-34 m2 kg / s"
+h<-"6.6206857e-34"
+i<-"42.659,30"
+
+
+a1<-as.numeric(a)
+b1<-as.numeric(b)
+c1<-as.numeric(c)
+d1<-as.numeric(d)
+e1<-as.numeric(e)
+f1<-as.numeric(f)
+g1<-as.numeric(g)
+h1<-as.numeric(h)
+i1<-as.numeric(i)
+
+a2<-tidyr::extract_numeric(a)
+b2<-tidyr::extract_numeric(b)
+c2<-tidyr::extract_numeric(c)
+d2<-tidyr::extract_numeric(d)
+e2<-tidyr::extract_numeric(e)
+f2<-tidyr::extract_numeric(f)
+g2<-tidyr::extract_numeric(g)
+h2<-tidyr::extract_numeric(h)
+i2<-tidyr::extract_numeric(i)
+```
+
+**as.numeric** will work only on h
+**extract_numer** will work on a, b, d, e,f, i
+
+#16.1 
+1. boy names ending in vowel
+```{r}
+BabyNames_small<-sample(BabyNames,1000)
+```
+
+Making boy name set
+```{r}
+boy_names<-
+  BabyNames %>%
+  group_by(name,sex) %>%
+  summarise(total=sum(count)) %>%
+  group_by(sex) %>%
+  spread(key=sex,value=total) %>%
+  filter(M>0) 
+```
+
+```{r}
+vowel_boys<-
+  boy_names %>%
+  filter(grepl(".{1,10}[aeiouy]{1}$",name)) %>%
+  arrange(desc(M))
+```
+10 most pop names ending in vowel (I include y as vowel):
+
+George	9928	1451408		
+Anthony	7010	1391462		
+Joshua	4851	1163815		
+Timothy	4318	1057538		
+Jeffrey	3497	968822		
+Gary	3287	897960		
+Larry	3560	803236		
+Gregory	2861	702805		
+Henry	4466	638441		
+Jerry	17304	609670	
+
+
+2. names ending in "joe" or "jo"
+```{r}
+names<-
+  BabyNames %>%
+  group_by(name,sex) %>%
+  summarise(total=sum(count)) %>%
+  group_by(sex) 
+```
+
+```{r}
+joe_names<-
+  names %>%
+  filter(grepl("joe$",name)) %>%
+  arrange(desc(total))
+
+jo_names<-
+  names %>%
+  filter(grepl("jo$",name)) %>%
+  arrange(desc(total))
+
+all_joes<-rbind(joe_names,jo_names)
+``` 
+
+Billyjoe	M	393		
+Bobbyjoe	M	89		
+Marjoe	M	12		
+Billiejoe	F	6		
+Maryjoe	F	6		
+Johnnyjoe	M	5		
+Maryjo	F	6973		
+Billiejo	F	1455		
+Marijo	F	1275		
+Bobbijo	F	1230	
+ 
+
+
+#16.2
+What would the given regular expression match?
+
+the regular expresion would extract phone-numbers, and it would only extract the numbers (not dashes)
+
+
+#16.3
+
+The matches will be 2 strings, it can make 55 matches, they refer to state abbreviations and US terriroty abbreviations 
+
