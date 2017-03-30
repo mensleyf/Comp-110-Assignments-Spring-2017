@@ -1,13 +1,31 @@
 # Week 8 Short Answer Questions
 
-## Your name should appear here!
+## Mira Ensley-Field
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
 
 ```{r include = FALSE}
 library(DataComputing)
+library(stringr)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+
+# 17.2
+
+1.) variables in model: all the possible branch points
+
+living_area, bathrooms, bedrooms, fireplaces
+
+
+2.) No, the bathroom number doesn't matter  for houses smaller than 1080 sq feet
+
+3.) For a house with more than 1080 sq feet and less than 1483; the typical difference between houses with <1.5 bathrooms and houses <1.5 bathrooms is roughly $30,000
+```{r}
+151424.407-179796
+```
+
+4.) having a fireplace only increases your house value if the house is large (has a  living area greater than 2816), otherwise it doesn't really matter 
+
+
